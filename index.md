@@ -1,0 +1,1 @@
+Hello [link to google](http://www.google.com) **bold**  $PRIMERATE

@@ -40,5 +40,17 @@ get '/:filename/edit' do |filename|
     return "Error: file #{filename}.md not found"
   end
   
-  erb :edit, :locals => { :filename => params[:filename] }
+  mdContent = File.read(mdPath)
+  erb :edit, :locals => { :filename => params[:filename], :content => mdContent }
+end
+
+post '/:filename/edit' do |filename|
+  mdPath = "./#{filename}.md"
+  fh = File.open(mdPath, 'w')
+  fh.puts params[:content]
+  fh.close
+  
+  redirect "/#{filename}.html"  
+  
+  
 end

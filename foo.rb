@@ -30,6 +30,15 @@ get '/:path.html' do |path|
     "Not found"
 
   end
-
 end
 
+get '/:filename/edit' do |filename|
+  mdPath = "./#{filename}.md"
+
+  if not File.exists?(mdPath) then
+    status 404
+    return "Error: file #{filename}.md not found"
+  end
+  
+  erb :edit, :locals => { :filename => params[:filename] }
+end

@@ -1,4 +1,4 @@
-CMS
+Ruby Demo
 ===
 
-content management system
+Ruby is cool

@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<head>
+</head>
+<body>
+<table>
+
+  <% files.each do |file| %>
+      <tr>
+        <td><%=file%></td>
+        <td><a href='/<%=file%>.html'>View</a></td>
+        <td><a href='/<%=file%>/edit'>Edit</a></td>
+      </tr>
+  <% end %>
+</table>
+</body>

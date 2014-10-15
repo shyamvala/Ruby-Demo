@@ -4,7 +4,10 @@ require 'fileutils'
 require 'redcarpet'
 
 get '/' do
-  redirect 'index.html'
+  files = Dir["*.md"].map do |file|
+    file.split(".")[0]
+  end
+  erb :index, :locals => {:files => files}
 end
 
 get '/readme' do
@@ -39,9 +42,9 @@ get '/:filename/edit' do |filename|
     status 404
     return "Error: file #{filename}.md not found"
   end
-  
+
   mdContent = File.read(mdPath)
-  erb :edit, :locals => { :filename => params[:filename], :content => mdContent }
+  erb :edit, :locals => {:filename => params[:filename], :content => mdContent}
 end
 
 post '/:filename/edit' do |filename|
@@ -49,8 +52,8 @@ post '/:filename/edit' do |filename|
   fh = File.open(mdPath, 'w')
   fh.puts params[:content]
   fh.close
-  
-  redirect "/#{filename}.html"  
-  
-  
+
+  redirect "/#{filename}.html"
+
+
 end
